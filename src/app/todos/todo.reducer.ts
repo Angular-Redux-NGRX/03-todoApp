@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Todo } from './models/todo.model';
-import { crearTodo, toggle, editar, borrar, toggleAll } from './todo.actions';
+import { crearTodo, toggle, editar, borrar, toggleAll, borrarCompletados } from './todo.actions';
 
 
 export const estadoInicial:Todo[] = [
@@ -43,6 +43,10 @@ const _todoReducer = createReducer(estadoInicial,
         completado
       }
     } );
+  }),
+
+  on(borrarCompletados, (state) => {
+    return state.filter( todo => !todo.completado );
   }),
 );
 
